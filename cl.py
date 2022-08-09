@@ -14,6 +14,6 @@ def T5(lines):
     return para
 
 if __name__ == "__main__":
-    lines =  ["are you interested in bitcoin?","There is a great opportunity for making money"]
+    lines =  ["Do you want to eat Pad Thai? There are really delicious food and I am sure you would like it."]
     paraphrased_lines = T5(lines)
     
