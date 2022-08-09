@@ -63,6 +63,6 @@ def multiple_agendas():
         single_agenda(agenda)
     
 if __name__ == "__main__":
-    single_trigger("get_contact_info","name")
-    #multiple_agendas()
+    #single_trigger("get_contact_info","name")
+    multiple_agendas()
     

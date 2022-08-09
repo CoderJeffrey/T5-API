@@ -13,12 +13,14 @@ These instructions will get you a copy of the project up and running on your loc
 - spaCy   
 
 #### T5 Paraphrase Generator
-
-- Streamlit library
 - Huggingface transformers library
 - Pytorch
 - Tensorflow 
 
+### Prepare
+```
+npm install
+```   
 
 ### General Usage
 ```
@@ -26,7 +28,7 @@ python output.py
 ```   
 - Read all text files from **TRAIN/NLI** dir
 - Generate Paraphrases for all files in **TRAIN/NLI** dir
-- Store the Paraphrases in **NLI_TRAIN_TOTAL** dir (grouped by agenda)
+- Store the Paraphrases in **NLI_TRAIN_TOTAL** dir (grouped by agenda) (ADD Mode instead of OVERWRITE)
 
 ```
 NLI_TRAIN_DATA File Structure
@@ -39,5 +41,6 @@ NLI_TRAIN_DATA File Structure
         - Trigger5.txt
     - Agenda3
 ```
+(Results of all paraphrased sentences)
 
-(to display the results of all paraphrased sentences)
+
