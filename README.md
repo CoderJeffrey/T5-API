@@ -9,6 +9,8 @@ These instructions will get you a copy of the project up and running on your loc
 - pip
 - Conda (recommended)
 - spaCy   
+  
+  
 
 #### T5 Paraphrase Generator
 - Huggingface transformers library
