@@ -1,0 +1,33 @@
+Original Text: I have a gift for you. 
+Paraphrase: I have a gift for you.
+Paraphrase: I have a gift for you .
+
+Original Text: You are lucky to win our biggest prize. 
+Paraphrase: The lucky winners are our biggest prize.
+Paraphrase: Sie are lucky to win our biggest prize.
+Paraphrase: You are lucky to win our biggest prize!
+Paraphrase: You are lucky to win our biggest prize.
+Paraphrase: We are lucky to win our biggest prize!
+Paraphrase: You are lucky to win our most lucrative prize.
+
+Original Text: Are you interested in bitcoin? 
+Paraphrase: Do you have an interest in Bitcoin?
+Paraphrase: You are interested in bitcoin?
+Paraphrase: Are you interested in Bitcoin?
+Paraphrase: Are you interested in bitcoin?
+
+Original Text: I have a gift for you. 
+Paraphrase: I have a gift for you.
+
+Original Text: You are lucky to win our biggest prize. 
+Paraphrase: Sie are lucky to win our biggest prize.
+Paraphrase: You are lucky to win our biggest prize.
+Paraphrase: You are lucky to win our biggest prize.
+Paraphrase: To win our biggest prize is luck.
+Paraphrase: Then you are lucky to win our largest prize!
+
+Original Text: Are you interested in bitcoin? 
+Paraphrase: Are you interested in Bitcoin?
+Paraphrase: Are you interested in bitcoin?
+Paraphrase: You are interested in bitcoin?
+
