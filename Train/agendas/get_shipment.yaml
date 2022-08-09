@@ -1,0 +1,170 @@
+name: get_shipment
+states:
+  - name: start_state
+    description: ask if the item can be shipped.
+  - name: cannot_ship
+    description: the item can not be shipped.
+  - name: can_ship
+    description: the item can be shipped.
+  - name: give_up
+    description: we ask enough.
+  - name: push_back
+    description: they ask why.
+  - name: checking
+    description: they are checking something
+  - name: claiming
+    description: they claim they are trustworthy
+  - name: location
+    description: they ask for your location
+start_state_name: start_state
+terminus_names:
+  - can_ship
+  - give_up
+transition_triggers:
+  - name: ship
+    description: ''
+  - name: cant_ship
+    description: ''
+  - name: why
+    description: ''
+  - name: check
+    description: ''
+  - name: nothing_to_do
+    description: ''
+  - name: claim
+    description: ''
+  - name: ask_location
+    description: ''
+  - name: out_of_range
+    description: ''
+kickoff_triggers:
+  - name: shipment
+    description: ''
+transitions:
+  start_state:
+    ship: can_ship
+    cant_ship: cannot_ship
+    why: push_back
+    ask_location: location
+  cannot_ship:
+    ship: can_ship
+    cant_ship: give_up
+    check: checking
+    why: push_back
+  can_ship: {}
+  give_up: {}
+  push_back:
+    check: checking
+    nothing_to_do: give_up
+    cant_ship: give_up
+    ship: can_ship
+    claim: claiming
+  checking:
+    ship: can_ship
+    nothing_to_do: give_up
+    cant_ship: give_up
+    why: push_back
+    ask_location: location
+  claiming:
+    ship: can_ship
+    ask_location: location
+    nothing_to_do: give_up
+    cant_ship: give_up
+    check: checking
+  location:
+    why: push_back
+    ship: can_ship
+    out_of_range: give_up
+    cant_ship: cannot_ship
+actions:
+  - name: ask_shipment
+    text: Could you deliver it? I am willing to pay the shipping fee.
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: ask_shipment_stall
+    text: You did not answer my question whether or not this item could be delivered?
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: say_thank
+    text: Thanks!
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: insist_shipment
+    text: Please, I want it to be delivered.
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: insist_shipmemt_stall
+    text: You have not responded. Could this item be delivered?
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: say_ok
+    text: OK
+    exclusive_flag: true
+    allowed_repeats: 3
+  - name: say_sure
+    text: Sure
+    exclusive_flag: true
+    allowed_repeats: 3
+  - name: say_reason
+    text: I prefer to have a physical gift card that I can credit it myself rather than giving away my bank account.
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: say_location
+    text: My address is 666 Beast St LA CA 90009
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: disappoint
+    text: Ok... :(
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: ignore_claim
+    text: Still I want it to be delivered.
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: insist_reason
+    text: Whatever, I am not giving away my bank account.
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: strike_claim
+    text: Are you going to deliver it or not?
+    exclusive_flag: true
+    allowed_repeats: 1
+action_map:
+  start_state:
+    - ask_shipment
+  cannot_ship:
+    - insist_shipment
+  can_ship:
+    - say_thank
+  give_up:
+    - disappoint
+  push_back:
+    - say_reason
+  checking:
+    - say_ok
+    - say_sure
+  claiming:
+    - ignore_claim
+  location:
+    - say_location
+stall_action_map:
+  start_state:
+    - ask_shipment_stall
+  cannot_ship:
+    - insist_shipmemt_stall
+  can_ship: []
+  give_up: []
+  push_back:
+    - insist_reason
+  checking:
+    - say_ok
+  claiming:
+    - strike_claim
+  location: []
+policy:
+  reuse: false
+  max_transitions: 5
+  absolute_accept_thresh: 0.6
+  min_accept_thresh_w_differential: 0.2
+  accept_thresh_differential: 0.1
+  kickoff_thresh: 0.8

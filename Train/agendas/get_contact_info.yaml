@@ -1,0 +1,93 @@
+name: get_contact_info
+states:
+  - name: name
+    description: start state
+  - name: have_name
+    description: get name of the phisher
+  - name: get_phone_number
+    description: get the phone number
+  - name: give_up
+    description: can't get enough info from the user
+  - name: checking
+    description: can't get name (1st Time)
+  - name: no_name
+    description: can't get name (2nd Time)
+start_state_name: name
+terminus_names:
+  - get_phone_number
+  - give_up
+transition_triggers:
+  - name: yes_name
+    description: ''
+  - name: no_name
+    description: ''
+  - name: yes_phone_number
+    description: ''
+  - name: no_phone_number
+    description: ''
+kickoff_triggers:
+  - name: name
+    description: ''
+transitions:
+  name:
+    yes_name: have_name
+    no_name: checking
+  have_name:
+    yes_phone_number: get_phone_number
+    no_phone_number: give_up
+  get_phone_number: {}
+  give_up: {}
+  checking:
+    yes_name: have_name
+    no_name: no_name
+  no_name:
+    yes_phone_number: get_phone_number
+    no_phone_number: give_up
+actions:
+  - name: ask_name
+    text: Thank you. May I ask you what's your name?
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: ask_phone_number
+    text: Do you mind telling me your number? In case there is any problems with what you offer.
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: reask_name
+    text: 'I sincerely hope to know your name to ensure the safety. '
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: thank_you
+    text: Thank you so much for providing your number. I was more assured now.
+    exclusive_flag: false
+    allowed_repeats: 1
+  - name: disappointment
+    text: Ok...
+    exclusive_flag: false
+    allowed_repeats: 1
+action_map:
+  name:
+    - ask_name
+  have_name:
+    - ask_phone_number
+  get_phone_number:
+    - thank_you
+  give_up:
+    - disappointment
+  checking:
+    - reask_name
+  no_name:
+    - ask_phone_number
+stall_action_map:
+  name: []
+  have_name: []
+  get_phone_number: []
+  give_up: []
+  checking: []
+  no_name: []
+policy:
+  reuse: false
+  max_transitions: 10
+  absolute_accept_thresh: 0.6
+  min_accept_thresh_w_differential: 0.2
+  accept_thresh_differential: 0.1
+  kickoff_thresh: 0.8

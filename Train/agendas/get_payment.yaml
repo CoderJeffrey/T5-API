@@ -1,0 +1,73 @@
+name: get_payment
+states:
+  - name: payment
+    description: ask Venmo; PayPal, Zelle
+  - name: have_payment
+    description: They gave us a choice of payment. Now it is time to ask for account information
+  - name: got_account
+    description: we have the account
+start_state_name: payment
+terminus_names:
+  - got_account
+transition_triggers:
+  - name: yes_payment
+    description: ''
+  - name: no_but_other_payment
+    description: ''
+  - name: account
+    description: ''
+  - name: no_payment
+    description: ''
+kickoff_triggers:
+  - name: payment
+    description: ''
+transitions:
+  payment:
+    yes_payment: have_payment
+    no_but_other_payment: have_payment
+    account: got_account
+    no_payment: payment
+  have_payment:
+    account: got_account
+  got_account: {}
+actions:
+  - name: ask_account
+    text: Great! What is your account?
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: say_thank
+    text: Thanks! I will send you the money.
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: ask_venmo
+    text: I have Venmo. Do you mind sending me the money through this channel?
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: ask_paypal
+    text: Do you use PayPal?
+    exclusive_flag: true
+    allowed_repeats: 1
+  - name: ask_zelle
+    text: Would Zelle work for you?
+    exclusive_flag: true
+    allowed_repeats: 1
+action_map:
+  payment:
+    - ask_venmo
+  have_payment:
+    - ask_account
+  got_account:
+    - say_thank
+stall_action_map:
+  payment:
+    - ask_paypal
+    - ask_zelle
+  have_payment: []
+  got_account: []
+policy:
+  reuse: false
+  max_transitions: 5
+  absolute_accept_thresh: 0.6
+  min_accept_thresh_w_differential: 0.2
+  accept_thresh_differential: 0.1
+  kickoff_thresh: 0.8

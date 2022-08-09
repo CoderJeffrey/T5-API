@@ -1,0 +1,5 @@
+Your address is out of range
+Your address is too far
+We can not ship a gift card to your address because your adress is too far
+We can not ship it to your address because your adress is too far
+We can not deliver a gift card to your address because your address is out of range
