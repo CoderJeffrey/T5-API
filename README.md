@@ -1,6 +1,5 @@
 # Overview 📑
-A Module can be implemented to 
- 1. get paraphrased text
+A Module can be implemented to generate paraphrased text (based on T5) from all the text files in a specified directory.
 
 ## Getting Started
 
