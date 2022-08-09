@@ -44,7 +44,10 @@ NLI_TRAIN_DATA File Structure
 ```
 (Results of all paraphrased sentences)
 
-
+   
+   
+       
+       
 
 ### Additional Info
 To test the results of the work, use the following command:
